@@ -175,3 +175,12 @@ RSpec.describe Arrays, "#filter_even" do
     end
   end
 end
+
+RSpec.describe Arrays, "#element_index_generator" do
+  context "given an array" do
+    it "returns an array with each element as a sub array alont with a sequence integer" do
+      result = Arrays.element_index_generator(['red', 'violet', 'blue'])
+      expect(result).to eq [['red', 1], ['violet', 2], ['blue', 3]]
+    end
+  end
+end
