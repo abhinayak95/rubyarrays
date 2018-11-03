@@ -184,3 +184,12 @@ RSpec.describe Arrays, "#element_index_generator" do
     end
   end
 end
+
+RSpec.describe Arrays, "#unique_elements" do
+  context "given two arrays" do
+    it "returns unique elements from first array" do
+      result = Arrays.unique_elements(["cool", "busta", "odb"], ["puffy", "cool", "busta"])
+      expect(result).to eq ["odb", "puffy"]
+    end
+  end
+end

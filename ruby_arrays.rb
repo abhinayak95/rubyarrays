@@ -10,11 +10,7 @@ module Arrays
   def self.divisibleby_3_and_5
     return Array(1..100).select {|element| element % 3 == 0 && element % 5 == 0}
   end
-  # players = [['r', 'kelly'], ['50', 'cent'], ['miley', 'cyrus']]
-  # Use the players array to construct the following array: ["kelly", "cent", "cyrus"]
-  # def self.arr_construct
-  # end
-  # Sum all the elements in the numbers array.
+
   def self.sum(arr)
     return arr.reduce(0) { |sum, num| sum + num}
   end
@@ -67,7 +63,13 @@ module Arrays
     return arr.map { |element| [element, arr.index(element)+1]}
   end
 
+  def self.unique_in_first_arr(first_arr, second_arr)
+    return first_arr.select { |element| !second_arr.include? element}
+  end
 
-
+  def self.unique_elements(first_arr, second_arr)
+    arr = first_arr.select { |element| !second_arr.include? element}
+    arr += second_arr.select { |element| !first_arr.include? element}
+  end
 
 end
