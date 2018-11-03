@@ -75,10 +75,17 @@ RSpec.describe Arrays, "#combination" do
       result = Arrays.combination(first_arr, second_arr)
       expect(result.length).to eq first_arr.length * second_arr.length
     end
-    xit "Throws an error if negative number for size is provided" do
-      expect {
-        result = Arrays.arr_multple_of_ten(-1)
-      }.to raise_error(ArgumentError)
+    xit "returns a multidimension array containing single element array when one of the array is empty" do
+      first_arr = ['1','2','3']
+      second_arr = []
+      result = Arrays.combination(first_arr, second_arr)
+      expect(result).to eq [['1'], ['2'], ['3']]
+    end
+    it "returns an empty array when both arrays are empty" do
+      first_arr = []
+      second_arr = []
+      result = Arrays.combination(first_arr, second_arr)
+      expect(result).to eq []
     end
   end
 end
@@ -114,6 +121,57 @@ RSpec.describe Arrays, "#search_string" do
     it "returns an array with elements having the search string" do
       result = Arrays.search_string(['batman', 'manbot', 'mace', 'tulip', 'nah man, nah'], "man")
       expect(result).to eq ["batman", "manbot", "nah man, nah"]
+    end
+  end
+end
+
+RSpec.describe Arrays, "#index_element" do
+  context "given an array and the index" do
+    it "returns an array with elements having provided index in the sub array" do
+      result = Arrays.index_element([['r', 'kelly'], ['50', 'cent'], ['miley', 'cyrus']], 1)
+      expect(result).to eq  ["kelly", "cent", "cyrus"]
+    end
+    it "returns an array with elements having provided index in the sub array" do
+      result = Arrays.index_element([['r', 'kelly'], ['50'], ['miley']], 1)
+      expect(result).to eq  ["kelly", nil, nil]
+    end
+    it "returns an array with nil when the index is out of bounds" do
+      result = Arrays.index_element([['r', 'kelly'], ['50', 'cent'], ['miley', 'cyrus']], 10)
+      expect(result).to eq  [nil, nil, nil]
+    end
+  end
+end
+
+RSpec.describe Arrays, "#to_hashes" do
+  context "given a multidimensional array with sub arrays of length 2" do
+    it "returns a hash with key value pair for every sub array" do
+      result = Arrays.to_hashes([['will smith', 'i am legend'], ['brad pitt', 'fight club'], ['frodo', 'the hobbit']])
+      expect(result).to eq ({
+        "will smith" => "i am legend",
+        "brad pitt" => "fight club",
+        "frodo" => "the hobbit"
+      })
+    end
+  end
+end
+
+RSpec.describe Arrays, "#filter_even" do
+  context "given an array" do
+    it "returns an array with only even integers" do
+      result = Arrays.filter_even([1, 2, 3, 4, 10, 20, 33, 35])
+      expect(result).to eq [2, 4, 10, 20]
+    end
+    it "returns an empty array when array contains only odd elements" do
+      result = Arrays.filter_even([1, 3, 33, 35])
+      expect(result).to eq []
+    end
+    it "returns an empty array for empty input array" do
+      result = Arrays.filter_even([])
+      expect(result).to eq []
+    end
+    it "returns an array with only even integers, including the negative even integers" do
+      result = Arrays.filter_even([1, 2, 3, -4, 10, -20, 33, 35])
+      expect(result).to eq [2, -4, 10, -20]
     end
   end
 end

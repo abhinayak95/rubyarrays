@@ -82,4 +82,17 @@ module Arrays
     result = arr.select { |string| string.include? search}
     return result
   end
+
+  def self.index_element(arr, index)
+    result = arr.map { |sub_arr| sub_arr[index]}
+  end
+
+  def self.to_hashes(arr)
+    return arr.to_h
+  end
+
+  def self.filter_even(arr)
+    # return arr.select { |element| element.even?}
+    return arr.select { |element| element % 2 == 0}
+  end
 end
